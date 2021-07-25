@@ -20,14 +20,10 @@ Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/4
 My project includes the following files:
 
 - **model.py** : Containing the script to create and train the model
-- **drive.py** : For driving the car in autonomous mode in the simulator (This is provided [Udacity](https://github.com/udacity/CarND-Behavioral-Cloning-P3/blob/master/drive.py), my only modification was to increase the car speed on line 47 from 9 to 15)
+- **drive.py** : For driving the car in autonomous mode in the simulator
 - **model.h5** : Containing a trained convolution neural network.
-- **writeup_report.md** : Summarizing the results
-
-Node:
-
-On my first iteration, I tried [LeNet](http://yann.lecun.com/exdb/lenet/) model and [nVidia Autonomous Car Group](https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/) model. This experiments could be found at [clone.py](clone.py).
-The visualizations I used to create this report could be found at [Visualizations.ipynb](Visualizations.ipynb).
+- **README.md** : Summarizing the results
+- **run2.mp4** : Results
 
 #### 2. Submission includes functional code Using the Udacity provided simulator and my drive.py file; the car can be driven autonomously around the track by executing
 
@@ -39,9 +35,17 @@ Python drive.py model.h5
 
 The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
-# Model Architecture
+### Model Architecture and Training Strategy
 
-The model used in this project is adopted from "nVidia Autonomous Car Group"'s model. I made some modifications, such as changing the filter size, input normalization, and the NN size. Here is the summary of the model.
+#### Model Architecture
+
+The model used in this project is adopted from "nVidia Autonomous Car Group"'s model. I made some modifications, such as changing the filter size, input normalization, and the NN size. 
+
+My model consists of a convolutional NN with both 5x5 filters size and 3x3 filter sizes with depths between 24 and 64 followed by NN layers (clone.py lines 61-72). The MaxPooling dropout layer is used to reduce overfitting and ReLu layers are used to introduce nonlinearity. 
+
+The lambda layer is used to normalized the data. It is followed by an extra layer to crop the input image.
+
+Here is the summary of the model.
 
 ```
 ______________________________________________________________
@@ -80,9 +84,7 @@ Trainable params: 736,533
 Non-trainable params: 0
 ```
 
-# Training Strategy
-
-## Configuration
+#### Model parameter tuning
 
 Dataset: 34425.
 Optimizer: Adam.
@@ -90,7 +92,7 @@ Error metric: Mean squared error.
 Validation Split: 20%.
 Epochs: 2.
 
-## Data Collection and Augmentation
+#### Data Collection and Augmentation
 
 The data are manually collected using the simulator. The data consists of:
 1. Two laps of center lane driving on both clockwise and counter-clockwise tracks.
@@ -99,11 +101,13 @@ The data are manually collected using the simulator. The data consists of:
 
 Two methods are used to augment the data.
 1. Process the image from the right camera and correct the steered value by 0.3.
-2. Perform image flip. Based on my experiment, doing this is better than processing the left camera images. Somehow the car is oscillating when I used both left and right camera images.
+2. Perform image flip. Based on my experiment, doing this is better than processing the left camera images. Somehow the car is oscillating when I used both left and right camera images. By flipping the image, it can also help to train the model as it is in the left side.
 
 ![alt text](/data/center.jpg "Center Camera Image")
 
 ![alt text](/data/right.jpg "Right Camera Image")
+
+I do lots of repetition in data collection. After training, I validated if the car was able to stay in the track or not. If not, I would check where it was not able to run within the track. With this information, I obtained more data where the car was not able to stay in the track. By adding more data, I hope the model can be better. And I repeated this cycle.
 
 ## Results
 
@@ -114,5 +118,5 @@ Epoch 2/2
 26924/26924 [==============================] - 75s 3ms/step - loss: 0.0129 - val_loss: 0.0222
 ```
 
-After this training, the car is able to stay in the track [first](run2.mp4).
+Although the validation loss is higher than the training loss indicating over fitting, at the end the car is able to stay in the track. The video can be found [here](run2.mp4)
 
