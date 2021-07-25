@@ -1,4 +1,43 @@
-# CarND_Behaviour_Cloning
+# Behavioral Cloning - Writeup
+
+## Goals
+
+The goals/steps of this project are the following:
+
+- Use the simulator to collect data of good driving behavior.
+- Build, a convolution neural network in [Keras](https://keras.io/) that predicts steering angles from images.
+- Train and validate the model with a training and validation set.
+- Test that the model successfully drives around track one without leaving the road.
+- Summarize the results with a written report.
+
+## Rubric points
+
+Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.
+
+### Files Submitted & Code Quality
+
+#### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
+My project includes the following files:
+
+- **model.py** : Containing the script to create and train the model
+- **drive.py** : For driving the car in autonomous mode in the simulator (This is provided [Udacity](https://github.com/udacity/CarND-Behavioral-Cloning-P3/blob/master/drive.py), my only modification was to increase the car speed on line 47 from 9 to 15)
+- **model.h5** : Containing a trained convolution neural network.
+- **writeup_report.md** : Summarizing the results
+
+Node:
+
+On my first iteration, I tried [LeNet](http://yann.lecun.com/exdb/lenet/) model and [nVidia Autonomous Car Group](https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/) model. This experiments could be found at [clone.py](clone.py).
+The visualizations I used to create this report could be found at [Visualizations.ipynb](Visualizations.ipynb).
+
+#### 2. Submission includes functional code Using the Udacity provided simulator and my drive.py file; the car can be driven autonomously around the track by executing
+
+```
+Python drive.py model.h5
+```
+
+#### 3. Submission code is usable and readable
+
+The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
 # Model Architecture
 
@@ -64,7 +103,7 @@ Two methods are used to augment the data.
 
 ![alt text](/data/center.jpg "Center Camera Image")
 
-![alt text](/data/left.jpg "Right Camera Image")
+![alt text](/data/right.jpg "Right Camera Image")
 
 ## Results
 
@@ -75,5 +114,5 @@ Epoch 2/2
 26924/26924 [==============================] - 75s 3ms/step - loss: 0.0129 - val_loss: 0.0222
 ```
 
-
+After this training, the car is able to stay in the track [first](run2.mp4).
 
