@@ -62,9 +62,9 @@ Two methods are used to augment the data.
 1. Process the image from the right camera and correct the steered value by 0.3.
 2. Perform image flip. Based on my experiment, doing this is better than processing the left camera images. Somehow the car is oscillating when I used both left and right camera images.
 
-![alt text](/data/center.png "Center Camera Image")
+![alt text](/data/center.jpg "Center Camera Image")
 
-![alt text](/data/left.png "Right Camera Image")
+![alt text](/data/left.jpg "Right Camera Image")
 
 ## Results
 
