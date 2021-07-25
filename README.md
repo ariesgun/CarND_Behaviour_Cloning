@@ -49,7 +49,7 @@ Dataset: 34425.
 Optimizer: Adam.
 Error metric: Mean squared error.
 Validation Split: 20%.
-Epochs: 3.
+Epochs: 2.
 
 ## Data Collection and Augmentation
 
@@ -70,11 +70,9 @@ Two methods are used to augment the data.
 
 ```
 Epoch 1/3
-26342/26342 [==============================] - 76s 3ms/step - loss: 0.0176 - val_loss: 0.0217
-Epoch 2/3
-26342/26342 [==============================] - 73s 3ms/step - loss: 0.0133 - val_loss: 0.0234
-Epoch 3/3
-26342/26342 [==============================] - 73s 3ms/step - loss: 0.0115 - val_loss: 0.0224
+26924/26924 [==============================] - 79s 3ms/step - loss: 0.0168 - val_loss: 0.0228
+Epoch 2/2
+26924/26924 [==============================] - 75s 3ms/step - loss: 0.0129 - val_loss: 0.0222
 ```
 
 
